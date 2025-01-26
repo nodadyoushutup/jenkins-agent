@@ -1,1 +1,1 @@
-FROM jenkins/inbound:3283.v92c105e0f819-7
+FROM jenkins/inbound:latest
