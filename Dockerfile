@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
     lsb-release \
-    software-properties-common
+    software-properties-common \
+    jq
 
 # Add the HashiCorp GPG key and repository so we can install Terraform
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
