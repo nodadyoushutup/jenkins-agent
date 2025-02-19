@@ -20,5 +20,8 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
 RUN apt-get update && apt-get install -y terraform ansible && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install MinIO Client
+RUN curl -sSL https://dl.min.io/client/mc/release/linux-amd64/mc -o mc && chmod +x mc && mv mc /usr/local/bin/
+
 # Switch back to the default (jenkins) user
 USER jenkins
