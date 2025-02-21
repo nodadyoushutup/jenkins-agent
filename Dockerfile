@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip
 
-# Install boto3 and botocore via pip
-RUN pip3 install boto3 botocore
+# Install boto3 and botocore via pip, overriding system restrictions.
+RUN pip3 install --break-system-packages boto3 botocore
 
 # Add the HashiCorp GPG key and repository to install Terraform
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
