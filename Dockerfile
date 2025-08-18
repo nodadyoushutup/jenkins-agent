@@ -12,7 +12,61 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     jq \
     python3 \
-    python3-pip
+    python3-pip \
+    bat \
+    bridge-utils \
+    btop \
+    cpu-checker \
+    dnsutils \
+    duf \
+    ethtool \
+    fd-find \
+    gh \
+    git \
+    htop \
+    ifupdown \
+    iotop \
+    iperf3 \
+    iptables \
+    libvirt-clients \
+    libvirt-daemon-system \
+    lshw \
+    lsof \
+    make \
+    mysql-client-core-8.0 \
+    nano \
+    net-tools \
+    netcat \
+    neovim \
+    nfs-common \
+    nmap \
+    nvtop \
+    open-iscsi \
+    parted \
+    postgresql-client \
+    python3-venv \
+    qemu-guest-agent \
+    qemu-kvm \
+    qemu-system \
+    qemu-system-x86 \
+    ripgrep \
+    rsync \
+    screen \
+    smartmontools \
+    strace \
+    tcpdump \
+    tmux \
+    traceroute \
+    tree \
+    ufw \
+    unzip \
+    util-linux \
+    vim \
+    virtinst \
+    wget \
+    whois \
+    xorriso \
+    zip
 
 # Install boto3 and botocore via pip, overriding system restrictions.
 RUN pip3 install --break-system-packages boto3 botocore
