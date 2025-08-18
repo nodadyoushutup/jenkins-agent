@@ -33,14 +33,13 @@ RUN apt-get update && apt-get install -y \
     lshw \
     lsof \
     make \
-    mysql-client-core-8.0 \
+    default-mysql-client \
     nano \
     net-tools \
-    netcat \
+    netcat-openbsd \
     neovim \
     nfs-common \
     nmap \
-    nvtop \
     open-iscsi \
     parted \
     postgresql-client \
