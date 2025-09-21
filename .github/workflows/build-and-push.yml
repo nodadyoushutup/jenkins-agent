@@ -31,12 +31,12 @@ jobs:
           version=$(grep -oP 'FROM\s+[^\s:]+:\K[^\s]+' Dockerfile)
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-      - name: Log the extracted version
-        run: echo "Jenkins inbound agent version is ${{ steps.get_version.outputs.version }}"
-
       - name: Log in to GitHub Container Registry
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push multi-platform Docker image (version + latest)
         run: |
