@@ -10,14 +10,78 @@ ARG TARGETARCH
 # Update package lists and install prerequisites, including Python and pip.
 RUN set -eux; \
     arch="${TARGETARCH:-$(dpkg --print-architecture)}"; \
+    export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
-    packages="apt-transport-https curl gnupg lsb-release software-properties-common jq python3 python3-pip bat bridge-utils btop cpu-checker dnsutils duf ethtool fd-find gh git htop ifupdown iotop iperf3 iptables libvirt-clients libvirt-daemon-system lshw lsof make default-mysql-client nano net-tools netcat-openbsd neovim nfs-common nmap open-iscsi parted postgresql-client python3-venv qemu-guest-agent qemu-kvm qemu-system ripgrep rsync screen smartmontools strace tcpdump tmux traceroute tree ufw unzip util-linux vim virtinst wget whois xorriso zip"; \
+    common_packages="apt-transport-https \
+      curl \
+      gnupg \
+      lsb-release \
+      software-properties-common \
+      jq \
+      python3 \
+      python3-pip \
+      bat \
+      bridge-utils \
+      btop \
+      dnsutils \
+      duf \
+      ethtool \
+      fd-find \
+      gh \
+      git \
+      htop \
+      ifupdown \
+      iotop \
+      iperf3 \
+      iptables \
+      libvirt-clients \
+      libvirt-daemon-system \
+      lshw \
+      lsof \
+      make \
+      default-mysql-client \
+      nano \
+      net-tools \
+      netcat-openbsd \
+      neovim \
+      nfs-common \
+      nmap \
+      open-iscsi \
+      parted \
+      postgresql-client \
+      python3-venv \
+      qemu-guest-agent \
+      ripgrep \
+      rsync \
+      screen \
+      smartmontools \
+      strace \
+      tcpdump \
+      tmux \
+      traceroute \
+      tree \
+      ufw \
+      unzip \
+      util-linux \
+      vim \
+      virtinst \
+      wget \
+      whois \
+      xorriso \
+      zip"; \
+    arch_packages=""; \
     case "$arch" in \
-      amd64|x86_64) packages="$packages qemu-system-x86" ;; \
-      arm64|aarch64) ;; \
-      *) echo "Unsupported architecture: $arch" >&2; exit 1 ;; \
+      amd64|x86_64) \
+        arch_packages="cpu-checker qemu-kvm qemu-system-x86" \
+        ;; \
+      arm64|aarch64) \
+        arch_packages="qemu-system-arm" \
+        ;; \
+      *) \
+        echo "Unsupported architecture: $arch" >&2; exit 1 \
+        ;; \
     esac; \
-    apt-get install -y $packages; \
+    apt-get install -y --no-install-recommends $common_packages $arch_packages; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/*
 
